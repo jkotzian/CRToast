@@ -171,11 +171,10 @@ CRToastAnimationType CRToastAnimationTypeFromSegmentedControl(UISegmentedControl
                                       kCRToastAnimationInTypeKey                : @(CRToastAnimationTypeFromSegmentedControl(_inAnimationTypeSegmentedControl)),
                                       kCRToastAnimationOutTypeKey               : @(CRToastAnimationTypeFromSegmentedControl(_outAnimationTypeSegmentedControl)),
                                       kCRToastAnimationInDirectionKey           : @(self.segFromDirection.selectedSegmentIndex),
-                                      kCRToastAnimationOutDirectionKey          : @(self.segToDirection.selectedSegmentIndex)
-                                      ,
-                                      kCRToastNotificationPreferredHeightKey    : @40.0f
-                                      ,
-                                      kCRToastImageAllignmentKey                : @(CRToastImageRight)
+                                      kCRToastAnimationOutDirectionKey          : @(self.segToDirection.selectedSegmentIndex),
+                                      kCRToastNotificationPreferredHeightKey    : @40.0f,
+                                      kCRToastImageAllignmentKey                : @(CRToastImageRight),
+                                      kCRToastFontKey                           : [UIFont systemFontOfSize:(20.0f)]
                                       
                                       
                                       
