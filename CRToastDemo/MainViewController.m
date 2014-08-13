@@ -175,7 +175,7 @@ CRToastAnimationType CRToastAnimationTypeFromSegmentedControl(UISegmentedControl
                                       ,
                                       kCRToastNotificationPreferredHeightKey    : @40.0f
                                       ,
-                                      kCRToastImageAllignmentKey                : @(CRToastImageCenter)
+                                      kCRToastImageAllignmentKey                : @(CRToastImageRight)
                                       
                                       
                                       

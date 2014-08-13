@@ -1058,11 +1058,32 @@ static CGFloat const CRStatusBarViewUnderStatusBarYOffsetAdjustment = -5;
                                       0 :
                                       CGRectGetHeight(contentFrame));
     
+    CGFloat padding = 10.0f;
+    
     if (self.toast.subtitleText == nil) {
-        self.label.frame = CGRectMake(x,
-                                      statusBarYOffset,
-                                      width,
-                                      CGRectGetHeight(contentFrame));
+        if (self.toast.textAlignment == NSTextAlignmentLeft) {
+            self.label.frame = CGRectMake(padding,
+                                          statusBarYOffset,
+                                          width,
+                                          CGRectGetHeight(contentFrame));
+        }
+        
+        else if (self.toast.textAlignment == NSTextAlignmentRight) {
+            self.label.frame = CGRectMake(-padding,
+                                          statusBarYOffset,
+                                          width,
+                                          CGRectGetHeight(contentFrame));
+        }
+        
+        else if (self.toast.textAlignment == NSTextAlignmentCenter) {
+            if (_label != nil) {
+                _label.textAlignment = self.toast.textAlignment;
+                self.label.frame = CGRectMake(0,
+                                              statusBarYOffset,
+                                              width,
+                                              CGRectGetHeight(contentFrame));
+            }
+        }
     } else {
         CGFloat height = MIN([self.toast.text boundingRectWithSize:CGSizeMake(width, MAXFLOAT)
                                                            options:NSStringDrawingUsesLineFragmentOrigin
@@ -1078,16 +1099,57 @@ static CGFloat const CRStatusBarViewUnderStatusBarYOffsetAdjustment = -5;
         }
         CGFloat offset = (CGRectGetHeight(contentFrame) - (height + subtitleHeight))/2;
         
-        self.label.frame = CGRectMake(x,
-                                      offset+statusBarYOffset,
-                                      CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
-                                      height);
+        //Have custom left and right text alignments
+        if (self.toast.textAlignment == NSTextAlignmentLeft) {
+            self.label.frame = CGRectMake(padding,
+                                          offset+statusBarYOffset,
+                                          width,
+                                          CGRectGetHeight(contentFrame));
+        }
         
+        else if (self.toast.textAlignment == NSTextAlignmentRight) {
+            self.label.frame = CGRectMake(-padding,
+                                          statusBarYOffset,
+                                          CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
+                                          height);
+        }
         
-        self.subtitleLabel.frame = CGRectMake(x,
+        else if (self.toast.textAlignment == NSTextAlignmentCenter) {
+            if (_label != nil) {
+                _label.textAlignment = self.toast.textAlignment;
+                self.label.frame = CGRectMake(x,
+                                              statusBarYOffset,
+                                              width,
+                                              CGRectGetHeight(contentFrame));
+            }
+        }
+        
+        //Have custom left and right text alignments
+        if (self.toast.textAlignment == NSTextAlignmentLeft) {
+            self.subtitleLabel.frame = CGRectMake(padding,
+                                                  height+offset+statusBarYOffset,
+                                                  CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
+                                                  subtitleHeight);
+        }
+        
+        else if (self.toast.textAlignment == NSTextAlignmentRight) {
+            self.subtitleLabel.frame = CGRectMake(padding,
+                                                  height+offset+statusBarYOffset,
+                                                  CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
+                                                  subtitleHeight);
+        }
+        
+        else if (self.toast.textAlignment == NSTextAlignmentCenter) {
+            if (_subtitleLabel != nil) {
+                _subtitleLabel.textAlignment = self.toast.textAlignment;
+                
+                _label.textAlignment = self.toast.textAlignment;
+                self.label.frame = CGRectMake(x,
                                               height+offset+statusBarYOffset,
                                               CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
                                               subtitleHeight);
+            }
+        }
     }
 }
 
@@ -1104,7 +1166,7 @@ static CGFloat const CRStatusBarViewUnderStatusBarYOffsetAdjustment = -5;
         _subtitleLabel.text = toast.subtitleText;
         _subtitleLabel.font = toast.subtitleFont;
         _subtitleLabel.textColor = toast.subtitleTextColor;
-        _subtitleLabel.textAlignment = toast.subtitleTextAlignment;
+        //_subtitleLabel.textAlignment = toast.subtitleTextAlignment;
         _subtitleLabel.numberOfLines = toast.subtitleTextMaxNumberOfLines;
     }
     _imageView.image = toast.image;
