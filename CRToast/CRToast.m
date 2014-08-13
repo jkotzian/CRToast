@@ -430,12 +430,18 @@ NSArray * CRToastGenericRecognizersMake(id target, CRToastInteractionResponder *
 
 + (void)initialize {
     if (self == [CRToast class]) {
+        kCRTextColorDefault = [UIColor whiteColor];
+        kCRTextShadowOffsetDefault = CGSizeZero;
+        kCRSubtitleFontDefault = [UIFont systemFontOfSize:12];
+        kCRSubtitleTextColorDefault = [UIColor whiteColor];
+        kCRSubtitleTextShadowOffsetDefault = CGSizeZero;
+        kCRInteractionResponders = @[];
         
-        [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                            kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:18],
-                                            kCRToastTextColorKey        : [UIColor whiteColor],
-                                            kCRToastAutorotateKey       : @(YES),
-                                            kCRToastNotificationPreferredHeightKey : @40.0f,
+        [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey               : @(CRToastTypeNavigationBar),
+                                            kCRToastFontKey                           : [UIFont fontWithName:@"HelveticaNeue-Light" size:18],
+                                            kCRToastTextColorKey                      : [UIColor whiteColor],
+                                            kCRToastAutorotateKey                     : @(YES),
+                                            kCRToastNotificationPreferredHeightKey    : @40.0f,
                                             kCRToastNotificationPresentationTypeKey   : @(CRToastPresentationTypeCover),
                                             kCRToastTextAlignmentKey                  : @(NSTextAlignmentLeft),
                                             kCRToastTimeIntervalKey                   : @(2.0f),
@@ -444,14 +450,7 @@ NSArray * CRToastGenericRecognizersMake(id target, CRToastInteractionResponder *
                                             kCRToastAnimationInDirectionKey           : @(0),
                                             kCRToastAnimationOutDirectionKey          : @(0),
                                             kCRToastImageAllignmentKey                : @(CRToastImageRight),
-                                            kCRToastBackgroundColorKey                : UIColorFromRGB(0xCC1B54)}];
-        
-        kCRTextColorDefault = [UIColor whiteColor];
-        kCRTextShadowOffsetDefault = CGSizeZero;
-        kCRSubtitleFontDefault = [UIFont systemFontOfSize:12];
-        kCRSubtitleTextColorDefault = [UIColor whiteColor];
-        kCRSubtitleTextShadowOffsetDefault = CGSizeZero;
-        kCRInteractionResponders = @[];
+                                            kCRToastBackgroundColorKey                : [UIColor grayColor]}];
         
         kCRToastKeyClassMap = @{kCRToastNotificationTypeKey                 : NSStringFromClass([@(kCRNotificationTypeDefault) class]),
                                 kCRToastNotificationPreferredHeightKey         : NSStringFromClass([@(kCRNotificationPreferredHeightDefault) class]),

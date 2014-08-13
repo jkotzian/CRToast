@@ -162,40 +162,25 @@ CRToastAnimationType CRToastAnimationTypeFromSegmentedControl(UISegmentedControl
 }
 
 - (NSDictionary*)options {
-    NSMutableDictionary *options = [@{kCRToastNotificationTypeKey               : self.coverNavBarSwitch.on ? @(CRToastTypeNavigationBar) : @(CRToastTypeStatusBar),
-                                      kCRToastNotificationPresentationTypeKey   : self.slideOverSwitch.on ? @(CRToastPresentationTypeCover) : @(CRToastPresentationTypePush),
-                                      kCRToastUnderStatusBarKey                 : @(self.slideUnderSwitch.on),
-                                      kCRToastTextKey                           : self.txtNotificationMessage.text,
-                                      kCRToastTextAlignmentKey                  : @(self.textAlignment),
-                                      kCRToastTimeIntervalKey                   : @(self.sliderDuration.value),
-                                      kCRToastAnimationInTypeKey                : @(CRToastAnimationTypeFromSegmentedControl(_inAnimationTypeSegmentedControl)),
-                                      kCRToastAnimationOutTypeKey               : @(CRToastAnimationTypeFromSegmentedControl(_outAnimationTypeSegmentedControl)),
-                                      kCRToastAnimationInDirectionKey           : @(self.segFromDirection.selectedSegmentIndex),
-                                      kCRToastAnimationOutDirectionKey          : @(self.segToDirection.selectedSegmentIndex),
+    NSMutableDictionary *options = [@{kCRToastNotificationPresentationTypeKey   : @(CRToastPresentationTypeCover),
+                                      kCRToastTextAlignmentKey                  : @(NSTextAlignmentLeft),
+                                      kCRToastTimeIntervalKey                   : @(2.0f),
+                                      kCRToastAnimationInTypeKey                : @(CRToastAnimationTypeSpring),
+                                      kCRToastAnimationOutTypeKey               : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationInDirectionKey           : @(0),
+                                      kCRToastAnimationOutDirectionKey          : @(0),
                                       kCRToastNotificationPreferredHeightKey    : @40.0f,
                                       kCRToastImageAllignmentKey                : @(CRToastImageRight),
-                                      kCRToastFontKey                           : [UIFont systemFontOfSize:(20.0f)]
-                                      
-                                      
-                                      
+                                      kCRToastImageKey                          : [UIImage imageNamed:@"alert_icon.png"],
                                       } mutableCopy];
-    if (self.showImageSwitch.on) {
-        options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];
-    }
     
-    if (![self.txtSubtitleMessage.text isEqualToString:@""]) {
-        options[kCRToastSubtitleTextKey] = self.txtSubtitleMessage.text;
-        options[kCRToastSubtitleTextAlignmentKey] = @(self.subtitleAlignment);
-    }
-    
-    if (_dismissibleWithTapSwitch.on) {
-        options[kCRToastInteractionRespondersKey] = @[[CRToastInteractionResponder interactionResponderWithInteractionType:CRToastInteractionTypeTap
-                                                                                                      automaticallyDismiss:YES
-                                                                                                                     block:^(CRToastInteractionType interactionType){
-                                                                                                                         NSLog(@"Dismissed with %@ interaction", NSStringFromCRToastInteractionType(interactionType));
-                                                                                                                     }]];
-    }
-    
+    //options[kCRToastImageKey] = [UIImage imageNamed:@"icon-camera"];
+    options[kCRToastTextKey] = @"Invalid email and/or password";
+    options[kCRToastInteractionRespondersKey] = @[[CRToastInteractionResponder interactionResponderWithInteractionType:CRToastInteractionTypeTap
+                                                                                                  automaticallyDismiss:YES
+                                                                                                                 block:^(CRToastInteractionType interactionType){
+                                                                                                                     NSLog(@"Dismissed with %@ interaction", NSStringFromCRToastInteractionType(interactionType));
+                                                                                                                 }]];
     return [NSDictionary dictionaryWithDictionary:options];
 }
 
