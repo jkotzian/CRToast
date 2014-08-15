@@ -435,7 +435,11 @@ NSArray * CRToastGenericRecognizersMake(id target, CRToastInteractionResponder *
         kCRSubtitleFontDefault = [UIFont systemFontOfSize:12];
         kCRSubtitleTextColorDefault = [UIColor whiteColor];
         kCRSubtitleTextShadowOffsetDefault = CGSizeZero;
-        kCRInteractionResponders = @[];
+        kCRInteractionResponders =@[[CRToastInteractionResponder
+                                     interactionResponderWithInteractionType:CRToastInteractionTypeTap
+                                     automaticallyDismiss:YES
+                                     block:^(CRToastInteractionType interactionType){;
+                                     }]];
         
         [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey               : @(CRToastTypeNavigationBar),
                                             kCRToastFontKey                           : [UIFont fontWithName:@"HelveticaNeue-Light" size:18],
@@ -1438,8 +1442,8 @@ CRToastAnimationStepBlock CRToastOutwardAnimationsSetupBlock(CRToastManager *wea
 
 - (void)addNotification:(CRToast*)notification {
     BOOL showingNotification = self.showingNotification;
-    [_notifications addObject:notification];
     if (!showingNotification) {
+        [_notifications addObject:notification];
         [self displayNotification:notification];
     }
 }
