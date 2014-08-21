@@ -364,6 +364,12 @@ extern NSString *const kCRToastImageAllignmentKey;
 
 + (void)showNotificationWithMessage:(NSString*)message completionBlock:(void (^)(void))completion;
 
++ (void)showNotificationErrorWithMessage: (NSString*)message image:(UIImage*)image;
+
++ (void)showNotificationSuccessWithMessage: (NSString*)message;
+
++ (void)showNotificationLoader;
+
 /**
  Immidiately begins the (un)animated dismisal of a notification
  @param animated If YES the notification will dismiss with its configure animation, otherwise it will immidiately disappear

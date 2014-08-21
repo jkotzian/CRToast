@@ -1309,6 +1309,29 @@ typedef void (^CRToastAnimationStepBlock)(void);
                       completionBlock:completion];
 }
 
++ (void)showNotificationErrorWithMessage: (NSString*)message image:(UIImage*)image {
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    options[kCRToastBackgroundColorKey] = UIColorFromRGB(0xCC1B54); //Magenta
+    options[kCRToastTextKey] = message;
+    
+    [CRToastManager showNotificationWithOptions:options completionBlock:nil];
+}
+
++ (void)showNotificationSuccessWithMessage: (NSString*)message {
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    options[kCRToastBackgroundColorKey] = UIColorFromRGB(0x1BCC93); //Turqoise
+    options[kCRToastTextKey] = message;
+    
+    [CRToastManager showNotificationWithOptions:options completionBlock:nil];
+}
+
++ (void)showNotificationLoader {
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    options[kCRToastBackgroundColorKey] = UIColorFromRGB(0x282C4C); //Purple
+    
+    [CRToastManager showNotificationWithOptions:options completionBlock:nil];
+}
+
 + (void)dismissNotification:(BOOL)animated {
     [[self manager] dismissNotification:animated];
 }
@@ -1452,7 +1475,7 @@ CRToastAnimationStepBlock CRToastOutwardAnimationsSetupBlock(CRToastManager *wea
     _notificationWindow.hidden = NO;
     CGSize notificationSize = CRNotificationViewSize(notification.notificationType, notification.preferredHeight);
     
-    CGRect containerFrame = CGRectMake(0, CRGetNavigationBarHeight() + CRGetStatusBarHeight(), notificationSize.width, notificationSize.height);
+    CGRect containerFrame = CGRectMake(0, CRGetNavigationBarHeight() + CRGetStatusBarHeight() - 1.0f, notificationSize.width, notificationSize.height);
     
     if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft) {
         containerFrame = CGRectMake(0, 0, notificationSize.height, notificationSize.width);
