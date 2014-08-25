@@ -364,9 +364,13 @@ extern NSString *const kCRToastImageAllignmentKey;
 
 + (void)showNotificationWithMessage:(NSString*)message completionBlock:(void (^)(void))completion;
 
-+ (void)showNotificationErrorWithMessage: (NSString*)message image:(UIImage*)image;
-
 + (void)showNotificationSuccessWithMessage: (NSString*)message;
+
++ (void)showNotificationSuccessWithMessage: (NSString*)message WithImage: (UIImage*)image;
+
++ (void)showNotificationErrorWithMessage: (NSString*)message;
+
++ (void)showNotificationErrorWithMessage: (NSString*)message WithImage:(UIImage*)image;
 
 + (void)showNotificationLoader;
 

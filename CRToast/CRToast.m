@@ -1309,10 +1309,19 @@ typedef void (^CRToastAnimationStepBlock)(void);
                       completionBlock:completion];
 }
 
-+ (void)showNotificationErrorWithMessage: (NSString*)message image:(UIImage*)image {
++ (void)showNotificationErrorWithMessage: (NSString*)message {
     NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
     options[kCRToastBackgroundColorKey] = UIColorFromRGB(0xCC1B54); //Magenta
     options[kCRToastTextKey] = message;
+    
+    [CRToastManager showNotificationWithOptions:options completionBlock:nil];
+}
+
++ (void)showNotificationErrorWithMessage: (NSString*)message WithImage:(UIImage*)image {
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    options[kCRToastBackgroundColorKey] = UIColorFromRGB(0xCC1B54); //Magenta
+    options[kCRToastTextKey] = message;
+    options[kCRToastImageKey] = image;
     
     [CRToastManager showNotificationWithOptions:options completionBlock:nil];
 }
@@ -1321,6 +1330,15 @@ typedef void (^CRToastAnimationStepBlock)(void);
     NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
     options[kCRToastBackgroundColorKey] = UIColorFromRGB(0x1BCC93); //Turqoise
     options[kCRToastTextKey] = message;
+    
+    [CRToastManager showNotificationWithOptions:options completionBlock:nil];
+}
+
++ (void)showNotificationSuccessWithMessage: (NSString*)message WithImage: (UIImage*)image {
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    options[kCRToastBackgroundColorKey] = UIColorFromRGB(0x1BCC93); //Turqoise
+    options[kCRToastTextKey] = message;
+    options[kCRToastImageKey] = image;
     
     [CRToastManager showNotificationWithOptions:options completionBlock:nil];
 }
